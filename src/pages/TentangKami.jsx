@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import { db } from "../firebase"; 
 import { doc, onSnapshot } from "firebase/firestore";
+import aboutTelurImg from '../assets/about-telur.png';
+import downloadImg from '../assets/download.jpg';
+import edukasiPilihanImg from '../assets/edukasi-pilihan.png';
+import heroBgImg from '../assets/hero-bg.png';
+import produkAImg from '../assets/produk A.png';
+import produkBImg from '../assets/produk B.png';
+import produkPilihanImg from '../assets/produk-pilihan.png';
 
 const milestones = [
   { year: '2018', event: 'Pendirian CV Semesta Agro Sinergy dengan visi peternakan bebas kimia.' },
