@@ -111,7 +111,7 @@ export default function Beranda() {
             ? 'min-h-[85vh] flex items-center' 
             : 'bg-gradient-to-br from-stone-950 via-stone-900 to-amber-950' 
         }`}
-        style={heroBgExists ? { backgroundImage: `url(${finalHeroBg})` } : {}}
+        style={{ backgroundImage: `url(${heroBgImg})` }}
       >
         {heroBgExists && <div className="absolute inset-0 bg-stone-950/30 z-10" />}
         
