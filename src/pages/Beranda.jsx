@@ -3,15 +3,11 @@ import { Link } from 'react-router-dom';
 // IMPORT KONEKSI FIRESTORE
 import { db } from "../firebase"; 
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-import heroBgImg from '../assets/hero-bg.png';
 
-import aboutTelurImg from '../assets/about-telur.png';
-import downloadImg from '../assets/download.jpg';
-import edukasiPilihanImg from '../assets/edukasi-pilihan.png';
+// IMPORT SEMUA GAMBAR LOKAL AGAR AMAN DI VERCEL
 import heroBgImg from '../assets/hero-bg.png';
-import produkAImg from '../assets/produk A.png';
-import produkBImg from '../assets/produk B.png';
-import produkPilihanImg from '../assets/produk-pilihan.png';
+import finalProdukImg from '../assets/produk-pilihan.png';
+import finalEdukasiImg from '../assets/edukasi-pilihan.png';
 
 const values = [
   {
@@ -48,12 +44,9 @@ const values = [
 
 export default function Beranda() {
   const finalHeroBg = "/src/assets/hero-bg.png";
-  const finalProdukImg = "/src/assets/produk-pilihan.png";
-  const finalEdukasiImg = "/src/assets/edukasi-pilihan.png";
-
   const [heroBgExists, setHeroBgExists] = useState(false);
 
-  // State Sinkronisasi Data Cloud
+  // State Data Cloud
   const [siteTexts, setSiteTexts] = useState({});
   const [featuredProduct, setFeaturedProduct] = useState(null);
   const [eduTip, setEduTip] = useState(null);
@@ -68,14 +61,13 @@ export default function Beranda() {
       } catch (e) { console.error("Gagal sinkron teks beranda:", e); }
     };
 
-    // 2. SINKRONISASI PRODUK PILIHAN (Ambil produk komersial yang Live)
+    // 2. SINKRONISASI PRODUK PILIHAN
     const fetchFeaturedProduct = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "products"));
         const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         const liveProducts = data.filter(p => p.isPublic === true);
         if (liveProducts.length > 0) {
-          // Cari varian yang ada badge Best Seller, jika tidak ada ambil data pertama
           const best = liveProducts.find(p => p.badge === 'Best Seller') || liveProducts[0];
           setFeaturedProduct(best);
         }
@@ -88,7 +80,7 @@ export default function Beranda() {
         const querySnapshot = await getDocs(collection(db, "articles"));
         const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         if (data.length > 0) {
-          setEduTip(data[0]); // Ambil data artikel terbaru paling atas
+          setEduTip(data[0]);
         }
       } catch (e) { console.error("Gagal sinkron artikel edukasi:", e); }
     };
@@ -112,7 +104,7 @@ export default function Beranda() {
 
   return (
     <div>
-      {/* ── HERO SECTION WITH DYNAMIC CONDITION ── */}
+      {/* ── HERO SECTION ── */}
       <section 
         className={`relative bg-cover bg-center bg-no-repeat overflow-hidden transition-all duration-500 ${
           heroBgExists 
@@ -133,7 +125,6 @@ export default function Beranda() {
               Peternakan Unggas Sehat #1
             </span>
 
-            {/* DYNAMIC HERO TITLE */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
               {siteTexts.heroTitle ? (
                 <>
@@ -147,7 +138,6 @@ export default function Beranda() {
               )}
             </h1>
 
-            {/* DYNAMIC HERO DESCRIPTION */}
             <p className="text-stone-200 text-lg leading-relaxed mb-8 max-w-xl">
               {siteTexts.heroDesc || "CV Semesta Agro Sinergy hadir sebagai pelopor peternakan unggas bersih yang tidak menggunakan intervensi kimia apapun menghasilkan telur berkualitas tinggi untuk kesehatan keluarga Indonesia."}
             </p>
@@ -207,7 +197,7 @@ export default function Beranda() {
         </div>
       </section>
 
-      {/* ── DYNAMIC HIGHLIGHT WITH PICTURES ── */}
+      {/* ── DYNAMIC HIGHLIGHT WITH PICTURES (AMAN UNTUK VERCEL) ── */}
       <section className="bg-white py-20 border-t border-stone-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
@@ -216,7 +206,7 @@ export default function Beranda() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Kartu Featured Product - DYNAMIC FROM FIREBASE */}
+            {/* Kartu Featured Product */}
             <div className="relative bg-gradient-to-br from-amber-50 to-stone-50 rounded-2xl p-6 border border-amber-200 overflow-hidden group hover:shadow-xl hover:shadow-amber-100 transition-all duration-300 hover:-translate-y-1">
               {(featuredProduct?.badge || 'Best Seller') && (
                 <span className="absolute top-5 right-5 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
@@ -226,7 +216,8 @@ export default function Beranda() {
               
               <div className="w-full h-48 rounded-xl overflow-hidden mb-5 bg-stone-100 shadow-inner flex items-center justify-center">
                 <img 
-                  src={featuredProduct?.imagePath || finalProdukImg} 
+                  // Jika gambar dari database ada link-nya pakai itu, kalau tidak pakai gambar aman hasil import
+                  src={featuredProduct?.imagePath?.startsWith('http') ? featuredProduct.imagePath : finalProdukImg} 
                   alt={featuredProduct?.name || 'Telur Sehat Sinergy'} 
                   onError={handleImageError} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
@@ -248,13 +239,14 @@ export default function Beranda() {
               </Link>
             </div>
 
-            {/* Kartu Edu Tip - DYNAMIC FROM FIREBASE */}
+            {/* Kartu Edu Tip */}
             <div className="relative bg-gradient-to-br from-stone-800 to-stone-900 rounded-2xl p-6 border border-stone-700 overflow-hidden group hover:shadow-xl hover:shadow-stone-900/40 transition-all duration-300 hover:-translate-y-1">
               <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/5 rounded-full translate-x-1/3 -translate-y-1/3" />
               
               <div className="w-full h-48 rounded-xl overflow-hidden mb-5 bg-stone-950 shadow-inner flex items-center justify-center">
                 <img 
-                  src={eduTip?.imagePath || finalEdukasiImg} 
+                  // Jika gambar artikel dari database ada link-nya pakai itu, kalau tidak pakai gambar aman hasil import
+                  src={eduTip?.imagePath?.startsWith('http') ? eduTip.imagePath : finalEdukasiImg} 
                   alt={eduTip?.title || 'Edukasi Sinergy'} 
                   onError={handleImageError} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" 
@@ -274,7 +266,7 @@ export default function Beranda() {
         </div>
       </section>
 
-      {/* ── CTA BANNER WITH DYNAMIC WHATSAPP NUMBER ── */}
+      {/* ── CTA BANNER ── */}
       <section className="bg-amber-500 py-14">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-stone-900 text-2xl sm:text-3xl font-extrabold mb-3">Siap Beralih ke Telur yang Lebih Sehat?</h2>
