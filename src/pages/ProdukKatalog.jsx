@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import { db } from "../firebase"; 
 import { collection, getDocs } from "firebase/firestore";
+import aboutTelurImg from '../assets/about-telur.png';
+import downloadImg from '../assets/download.jpg';
+import edukasiPilihanImg from '../assets/edukasi-pilihan.png';
+import heroBgImg from '../assets/hero-bg.png';
+import produkAImg from '../assets/produk A.png';
+import produkBImg from '../assets/produk B.png';
+import produkPilihanImg from '../assets/produk-pilihan.png';
 
 // Fungsi helper untuk warna badge
 const getBadgeColor = (badge) => {
