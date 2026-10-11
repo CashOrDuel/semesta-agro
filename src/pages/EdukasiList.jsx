@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from "../firebase"; // Pastikan path import firebase benar
 import { collection, getDocs, query, where } from "firebase/firestore";
+import aboutTelurImg from '../assets/about-telur.png';
+import downloadImg from '../assets/download.jpg';
+import edukasiPilihanImg from '../assets/edukasi-pilihan.png';
+import heroBgImg from '../assets/hero-bg.png';
+import produkAImg from '../assets/produk A.png';
+import produkBImg from '../assets/produk B.png';
+import produkPilihanImg from '../assets/produk-pilihan.png';
 
 // PASTIKAN SAMA PERSIS dengan di file Admin
 const CATEGORIES = ['Semua', 'Manajemen Kandang', 'Perawatan Fasilitas', 'Sanitasi & Kebersihan', 'Tips Umum'];
