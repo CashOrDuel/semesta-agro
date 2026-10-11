@@ -5,6 +5,14 @@ import { db } from "../firebase";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import heroBgImg from '../assets/hero-bg.png';
 
+import aboutTelurImg from '../assets/about-telur.png';
+import downloadImg from '../assets/download.jpg';
+import edukasiPilihanImg from '../assets/edukasi-pilihan.png';
+import heroBgImg from '../assets/hero-bg.png';
+import produkAImg from '../assets/produk A.png';
+import produkBImg from '../assets/produk B.png';
+import produkPilihanImg from '../assets/produk-pilihan.png';
+
 const values = [
   {
     icon: (
