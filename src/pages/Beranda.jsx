@@ -6,8 +6,9 @@ import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 // IMPORT SEMUA GAMBAR LOKAL AGAR AMAN DI VERCEL
 import heroBgImg from '../assets/hero-bg.png';
-import finalProdukImg from '../assets/produk-pilihan.png';
-import finalEdukasiImg from '../assets/edukasi-pilihan.png';
+// TUKAR NAMA FILE IMPORT-NYA DI SINI
+import finalProdukImg from '../assets/edukasi-pilihan.png'; // Menunjuk ke gambar baki telur
+import finalEdukasiImg from '../assets/produk-pilihan.png'; // Menunjuk ke gambar tangan/ayam
 
 const values = [
   {
