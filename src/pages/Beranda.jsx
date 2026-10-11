@@ -197,7 +197,7 @@ export default function Beranda() {
         </div>
       </section>
 
-      {/* ── DYNAMIC HIGHLIGHT WITH PICTURES (AMAN UNTUK VERCEL) ── */}
+      {/* ── DYNAMIC HIGHLIGHT WITH PICTURES (POSISI GAMBAR SUDAH PAS) ── */}
       <section className="bg-white py-20 border-t border-stone-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
@@ -216,7 +216,6 @@ export default function Beranda() {
               
               <div className="w-full h-48 rounded-xl overflow-hidden mb-5 bg-stone-100 shadow-inner flex items-center justify-center">
                 <img 
-                  // Jika gambar dari database ada link-nya pakai itu, kalau tidak pakai gambar aman hasil import
                   src={featuredProduct?.imagePath?.startsWith('http') ? featuredProduct.imagePath : finalProdukImg} 
                   alt={featuredProduct?.name || 'Telur Sehat Sinergy'} 
                   onError={handleImageError} 
@@ -245,7 +244,6 @@ export default function Beranda() {
               
               <div className="w-full h-48 rounded-xl overflow-hidden mb-5 bg-stone-950 shadow-inner flex items-center justify-center">
                 <img 
-                  // Jika gambar artikel dari database ada link-nya pakai itu, kalau tidak pakai gambar aman hasil import
                   src={eduTip?.imagePath?.startsWith('http') ? eduTip.imagePath : finalEdukasiImg} 
                   alt={eduTip?.title || 'Edukasi Sinergy'} 
                   onError={handleImageError} 
