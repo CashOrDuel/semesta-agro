@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 import { db } from "../firebase"; 
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 
-// IMPORT GAMBAR (DISESUAIKAN DENGAN NAMA FILE FISIK DI FOLDER ASSETS)
-import heroBgImg from '../assets/hero-bg.png';
-import finalProdukImg from '../assets/edukasi-pilihan.png'; // Mengarah ke gambar baki telur untuk produk
-import finalEdukasiImg from '../assets/produk-pilihan.png'; // Mengarah ke gambar tangan/ayam untuk edukasi
-
 const values = [
   {
     icon: (
@@ -193,7 +188,7 @@ export default function Beranda() {
         </div>
       </section>
 
-      {/* ── DYNAMIC HIGHLIGHT WITH PICTURES ── */}
+      {/* ── DYNAMIC HIGHLIGHT WITH PICTURES (DIJAMIN TIDAK BAKAL TERTUKAR LAGI) ── */}
       <section className="bg-white py-20 border-t border-stone-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
@@ -202,7 +197,7 @@ export default function Beranda() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Kartu Featured Product (Kiri) */}
+            {/* Kartu Featured Product (KIRI) -> DIJAMIN PAKAI produk-pilihan.png */}
             <div className="relative bg-gradient-to-br from-amber-50 to-stone-50 rounded-2xl p-6 border border-amber-200 overflow-hidden group hover:shadow-xl hover:shadow-amber-100 transition-all duration-300 hover:-translate-y-1">
               {(featuredProduct?.badge || 'Best Seller') && (
                 <span className="absolute top-5 right-5 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
@@ -212,7 +207,7 @@ export default function Beranda() {
               
               <div className="w-full h-48 rounded-xl overflow-hidden mb-5 bg-stone-100 shadow-inner flex items-center justify-center">
                 <img 
-                  src={finalProdukImg} 
+                  src="/src/assets/produk-pilihan.png" 
                   alt={featuredProduct?.name || 'Telur Sehat Sinergy'} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
@@ -233,13 +228,13 @@ export default function Beranda() {
               </Link>
             </div>
 
-            {/* Kartu Edu Tip (Kanan) */}
+            {/* Kartu Edu Tip (KANAN) -> DIJAMIN PAKAI edukasi-pilihan.png */}
             <div className="relative bg-gradient-to-br from-stone-800 to-stone-900 rounded-2xl p-6 border border-stone-700 overflow-hidden group hover:shadow-xl hover:shadow-stone-900/40 transition-all duration-300 hover:-translate-y-1">
               <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/5 rounded-full translate-x-1/3 -translate-y-1/3" />
               
               <div className="w-full h-48 rounded-xl overflow-hidden mb-5 bg-stone-950 shadow-inner flex items-center justify-center">
                 <img 
-                  src={finalEdukasiImg} 
+                  src="/src/assets/edukasi-pilihan.png" 
                   alt={eduTip?.title || 'Edukasi Sinergy'} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" 
                 />
