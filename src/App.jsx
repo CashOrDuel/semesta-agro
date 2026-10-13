@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Beranda from './pages/Beranda';
@@ -26,6 +27,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 export default function App() {
   return (
     <BrowserRouter>
+      <SpeedInsights />
       <Routes>
         {/* ── GRUP 1: HALAMAN PENGUNJUNG UMUM (Pakai Navbar & Footer) ── */}
         <Route
